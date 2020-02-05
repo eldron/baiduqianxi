@@ -59,7 +59,7 @@ if __name__ == '__main__':
 				f = open(htmldir + filename, "r")
 				s = f.read()
 				f.close()
-				jobject = json.loads(s[3:-2])
+				jobject = json.loads(s.split('(')[1].split(')')[0])
 				detailed_data = jobject['data']['list']
 				# detailed[u'city_name']
 				# detailed_data[u'province_name']

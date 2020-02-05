@@ -50,7 +50,7 @@ if __name__ == '__main__':
 			f = open(htmldir + filename, "r")
 			s = f.read()
 			f.close()
-			jobject = json.loads(s[3:-2])
+			jobject = json.loads(s.split('(')[1].split(')')[0])
 			dic = jobject['data']['list']
 			# key is unicode string, value is float number
 			try:
@@ -62,9 +62,10 @@ if __name__ == '__main__':
 							worksheet.write(row, 0, cityname)
 						else:
 							worksheet.write(row, 0, cityname + u"市")
+						
 						worksheet.write(row, 1, nametoid[cityname])
 						worksheet.write(row, 2, date)
-						worksheet.write(row, 3, value / 10000)
+						worksheet.write(row, 3, value)
 						row += 1
 			except Exception as e:
 				print('some error occured')
