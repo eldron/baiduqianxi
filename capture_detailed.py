@@ -5,6 +5,7 @@
 from bs4 import BeautifulSoup
 import urllib.request
 import sys
+import os
 
 if __name__ == '__main__':
 	if len(sys.argv) != 5:
@@ -61,17 +62,24 @@ if __name__ == '__main__':
 		parttwo = '&type='
 		partthree = '&date='
 		#parttwo = "&type=move_in&date="
+		files = os.listdir(directory)
 		for id, name in cdic.items():
 			for date in days:
+				if type == 'move_in':
+					filename = u"人口迁入详情 " + name + '.' + date + '.html'
+				else:
+					filename = u"人口迁出详情 " + name + '.' + date + '.html'
+				
 				request_url = partone + id + parttwo + type + partthree + date
 				print('request_url is: ' + request_url)
-				request_page = urllib.request.urlopen(request_url)
-				#soup = BeautifulSoup(request_page, 'html.parser')
-				if type == 'move_in':
-					filename = directory + u"人口迁入详情 " + name + '.' + date + '.html'
-				else:
-					filename = directory + u"人口迁出详情 " + name + '.' + date + '.html'
-				print('filename is: ' + filename)
-				f = open(filename, "wb")
-				f.write(request_page.read())
-				f.close()
+				if filename not in files:	
+					request_page = urllib.request.urlopen(request_url)
+					#soup = BeautifulSoup(request_page, 'html.parser')
+					# if type == 'move_in':
+					# 	filename = directory + u"人口迁入详情 " + name + '.' + date + '.html'
+					# else:
+					# 	filename = directory + u"人口迁出详情 " + name + '.' + date + '.html'
+					print('filename is: ' + filename)
+					f = open(directory + filename, "wb")
+					f.write(request_page.read())
+					f.close()

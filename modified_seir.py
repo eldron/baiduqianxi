@@ -2,6 +2,9 @@
 # exposed 可按 beta2 概率将susceptible 变为 exposed
 # exposed 每天接触人数为r2
 
+# https://x.cnki.net/resource/CMFD/2006158909.NH/images/Dissertation_2006158909_1.jpg
+# 79 pages
+
 import matplotlib.pyplot as plt
 import numpy as np
 
